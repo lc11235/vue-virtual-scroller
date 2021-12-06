@@ -249,6 +249,7 @@ export default {
 
     handleScroll (event) {
       if (!this.$_scrollDirty) {
+        this.$emit('scrollAll')
         this.$_scrollDirty = true
         requestAnimationFrame(() => {
           this.$_scrollDirty = false

@@ -831,6 +831,7 @@
         var _this2 = this;
 
         if (!this.$_scrollDirty) {
+          this.$emit('scrollAll');
           this.$_scrollDirty = true;
           requestAnimationFrame(function () {
             _this2.$_scrollDirty = false;
@@ -1511,6 +1512,9 @@
       this.vscrollData.active = false;
     },
     methods: {
+      onScroll: function onScroll() {
+        this.$emit('scrollAll');
+      },
       onScrollerResize: function onScrollerResize() {
         var scroller = this.$refs.scroller;
 
@@ -1595,7 +1599,11 @@
               direction: _vm.direction,
               "key-field": "id"
             },
-            on: { resize: _vm.onScrollerResize, visible: _vm.onScrollerVisible },
+            on: {
+              resize: _vm.onScrollerResize,
+              visible: _vm.onScrollerVisible,
+              scrollAll: _vm.onScroll
+            },
             scopedSlots: _vm._u(
               [
                 {
@@ -2009,7 +2017,7 @@
 
   var plugin$2 = {
     // eslint-disable-next-line no-undef
-    version: "1.0.10",
+    version: "1.0.11",
     install: function install(Vue, options) {
       var finalOptions = Object.assign({}, {
         installComponents: true,

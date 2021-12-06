@@ -361,6 +361,7 @@ var script = {
       var _this2 = this;
 
       if (!this.$_scrollDirty) {
+        this.$emit('scrollAll');
         this.$_scrollDirty = true;
         requestAnimationFrame(function () {
           _this2.$_scrollDirty = false;
@@ -1041,6 +1042,9 @@ var script$1 = {
     this.vscrollData.active = false;
   },
   methods: {
+    onScroll: function onScroll() {
+      this.$emit('scrollAll');
+    },
     onScrollerResize: function onScrollerResize() {
       var scroller = this.$refs.scroller;
 
@@ -1125,7 +1129,11 @@ var __vue_render__$1 = function() {
             direction: _vm.direction,
             "key-field": "id"
           },
-          on: { resize: _vm.onScrollerResize, visible: _vm.onScrollerVisible },
+          on: {
+            resize: _vm.onScrollerResize,
+            visible: _vm.onScrollerVisible,
+            scrollAll: _vm.onScroll
+          },
           scopedSlots: _vm._u(
             [
               {
@@ -1539,7 +1547,7 @@ function registerComponents(Vue, prefix) {
 
 var plugin = {
   // eslint-disable-next-line no-undef
-  version: "1.0.10",
+  version: "1.0.11",
   install: function install(Vue, options) {
     var finalOptions = Object.assign({}, {
       installComponents: true,

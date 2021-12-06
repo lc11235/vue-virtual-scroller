@@ -8,6 +8,7 @@
     v-bind="$attrs"
     @resize="onScrollerResize"
     @visible="onScrollerVisible"
+    @scrollAll="onScroll"
     v-on="listeners"
   >
     <template slot-scope="{ item: itemWithSize, index, active }">
@@ -155,6 +156,9 @@ export default {
   },
 
   methods: {
+    onScroll () {
+      this.$emit('scrollAll')
+    },
     onScrollerResize () {
       const scroller = this.$refs.scroller
       if (scroller) {
